@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SK CINEMAS</title>
+    <style>
+      /* Animation and transition styles */
+      @keyframes slideInFromLeft {
+        0% {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .movie-container {
+        display: flex;
+        margin-bottom: 20px;
+        animation: slideInFromLeft 0.5s ease-out; /* Apply animation to each movie container */
+      }
+
+      .movie-poster {
+        flex: 0 0 200px; /* Fixed width for the poster */
+        margin-right: 20px; /* Space between poster and text */
+      }
+
+      .movie-details {
+        flex: 1; /* Flexible width for title and description */
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f0f0f0;
+        padding: 20px;
+        background-image: url("https://img.freepik.com/free-photo/assortment-cinema-supplies_23-2147803976.jpg?w=1060&t=st=1720623658~exp=1720624258~hmac=d4fc0a00467f1eb03e5d54ee9f4290172bd5fb1c8f2c083dd5f1be345bb7ec92"); /* Replace with your image path */
+        background-size: cover; /* Cover the entire background */
+        background-position: center; /* Center the background image */
+        background-repeat: no-repeat; /* Do not repeat the background image */
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        background-color: #fff;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease; /* Smooth hover effect */
+      }
+
+      li:hover {
+        transform: translateY(-5px); /* Lift the card on hover */
+      }
+
+      a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .empty-list {
+        text-align: center;
+        color: #888;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SK CINEMAS</h1>
+    <ul>
+      {% for movie in movies %}
+      <li>
+        <div id="movie-wrapper">
+          <div class="movie-container">
+            {% if movie.poster %}
+            <div class="movie-poster">
+              <img
+                src="{{ movie.poster.url }}"
+                alt="{{ movie.title }} poster"
+                style="max-width: 100%; max-height: 100%"
+              />
+            </div>
+            {% endif %}
+            <div class="movie-details">
+              <h2>{{ movie.title }}</h2>
+              <p>{{ movie.description }}</p>
+              <a href="{% url 'book_movie' movie.id %}" class="btn">Book Now</a>
+              <p>
+                <a
+                  href="https://www.youtube.com/watch?v=uV50UfcIT68"
+                  class="btn"
+                  target="_blank"
+                  >Watch Trailer</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -9,7 +9,13 @@ class BookingInline(admin.TabularInline):
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'booking_summary')
+    list_display = ('title', 'description','trailer_url','booking_summary')
+    
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'description', 'poster', 'trailer_url')
+        }),
+    )
 
     inlines = [
         BookingInline,

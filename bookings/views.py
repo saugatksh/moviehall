@@ -6,6 +6,7 @@ def movie_list(request):
     movies = Movie.objects.all()
     return render(request, 'bookings/movie_list.html', {'movies': movies})
 
+
 def book_movie(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
     if request.method == 'POST':
